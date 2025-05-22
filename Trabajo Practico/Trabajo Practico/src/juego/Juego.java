@@ -39,7 +39,6 @@ public class Juego extends InterfaceJuego {
             boolean validPosition;
             do {
                 // Generar posiciones aleatorias dentro del entorno
-                // Asegurarse de que el demonio no se genere parcialmente fuera de la pantalla
                 demonX = random.nextDouble() * (entorno.ancho() - (mago.ancho * 2)) + mago.ancho;
                 demonY = random.nextDouble() * (entorno.alto() - (mago.alto * 2)) + mago.alto;
 
