@@ -12,7 +12,7 @@ public class Juego extends InterfaceJuego {
     Juego() {
         this.entorno = new Entorno(this, "Proyecto para TP", 800, 600);
         this.mago = new Personaje(entorno.ancho() / 2, entorno.alto() / 2, this.entorno);
-        this.fondo = new Fondo("imagenes/Fondo.png", this.entorno, this.mago); 
+        this.fondo = new Fondo("imagenes/Fondo.png", this.entorno, this.mago); // Pasa el mago al constructor del Fondo
 
         this.entorno.iniciar();
     }
@@ -39,7 +39,7 @@ public class Juego extends InterfaceJuego {
             mago.moverAbajo();
         }
 
-
+       
         int menuRectAncho = 200;
         int menuRectAlto = 560; 
        
