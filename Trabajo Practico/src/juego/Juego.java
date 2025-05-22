@@ -12,14 +12,14 @@ public class Juego extends InterfaceJuego {
     Juego() {
         this.entorno = new Entorno(this, "Proyecto para TP", 800, 600);
         this.mago = new Personaje(entorno.ancho() / 2, entorno.alto() / 2, this.entorno);
-        this.fondo = new Fondo("imagenes/Fondo.png", this.entorno, this.mago); // Pasa el mago al constructor del Fondo
+        this.fondo = new Fondo("imagenes/Fondo.png", this.entorno, this.mago); 
 
         this.entorno.iniciar();
     }
 
     public void tick() {
         fondo.dibujar(); // Dibuja el fondo
-        fondo.dibujarMenu(); // Dibuja la interfaz de usuario (vida y poderes) usando el método del Fondo
+        fondo.dibujarMenu(); // Dibuja la interfaz de usuario (vida y poderes) 
 
         // Guarda la posición actual del mago antes de intentar moverlo
         double prevMagoX = mago.x;
@@ -39,14 +39,12 @@ public class Juego extends InterfaceJuego {
             mago.moverAbajo();
         }
 
-        // --- Colisión con el rectángulo de la UI (Menú) ---
-        // Definir las dimensiones y posición del rectángulo del menú.
-        // ¡Estos valores deben coincidir exactamente con los de Fondo.dibujarMenu()!
+
         int menuRectAncho = 200;
-        int menuRectAlto = 560; // Coincide con Fondo.java
+        int menuRectAlto = 560; 
        
-        int menuRectX = menuRectAncho / 2 + 10; // Coincide con Fondo.java
-        int menuRectY =  menuRectAlto / 2 + 20; // Coincide con Fondo.java
+        int menuRectX = menuRectAncho / 2 + 10; 
+        int menuRectY =  menuRectAlto / 2 + 20; 
 
         // Calcular los bordes del rectángulo del menú
         double rectLeft = menuRectX - menuRectAncho / 2.0;
@@ -66,7 +64,7 @@ public class Juego extends InterfaceJuego {
             mago.y = prevMagoY;
         }
 
-        mago.mostrar();    // Dibuja el personaje (después de posibles reversiones de posición)
+        mago.mostrar();    // Dibuja el personaje 
     }
 
     public static void main(String[] args) {
