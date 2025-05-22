@@ -35,8 +35,7 @@ public class Fondo {
         // Centrado verticalmente para que el borde superior e inferior tengan 20 píxeles de margen
         int menuRectY = menuRectAlto / 2 + 20; 
 
-        // Dibujar la imagen del menú en lugar del rectángulo negro
-        // Asumiendo que la imagen FondoMenu.png tiene las dimensiones 200x560
+        // Dibujar la imagen del menú 
         e.dibujarImagen(imagenMenu, menuRectX, menuRectY, 0, 1.0);
 
         // --- Mostrar la vida del mago ---
