@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="src" path="Reyno_Ramirez_TP1_P1-main/Trabajo Practico/Trabajo Practico/src"/>
-	<classpathentry kind="lib" path="Reyno_Ramirez_TP1_P1-main/Trabajo Practico/Trabajo Practico/entorno.jar"/>
-	<classpathentry kind="output" path="Reyno_Ramirez_TP1_P1-main/Trabajo Practico/Trabajo Practico/bin"/>
-</classpath>
