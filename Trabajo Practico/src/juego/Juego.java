@@ -15,6 +15,7 @@ public class Juego extends InterfaceJuego {
     private Demonio[] demonios; // Un arreglo para almacenar los demonios
     private Random random; // Para generar los demonios 
     private boolean juegoTerminado = false;
+    private boolean juegoGanado = false;
     private List<Poderes> poderesActivos;
     private int totalDemoniosDisponibles = 20; // total que tendrá el juego
     private int demoniosRestantes;             // muestra en pantalla la cantidad de demonios que quedan con vida
@@ -90,17 +91,20 @@ public class Juego extends InterfaceJuego {
     	// muestra la cantidad de demonios 
     	fondo.setDemoniosRestantes(demoniosRestantes);
     	fondo.dibujarMenu();
+    	fondo.dibujar();
+    	
         if (juegoTerminado) {
-            entorno.cambiarFont("Impact", 40, Color.RED);
-            entorno.escribirTexto("\u00a1GAME OVER!", 300, 300);
-            return;
+        	 entorno.cambiarFont("Impact", 40, juegoGanado ? Color.GREEN : Color.RED);
+        	    String mensaje = juegoGanado ? "¡GANASTE!" : "GAME OVER!";
+        	    entorno.escribirTexto(mensaje, entorno.ancho() / 2 - 100, entorno.alto() / 2);
+        	    return;
         }
-        if ( entorno.sePresiono('J')) {
+        if ( entorno.sePresionoBoton(entorno.BOTON_IZQUIERDO)) {
             boolean direccion = mago.getUltimaDireccion();
             poderesActivos.add(new Poderes(mago.x, mago.y, entorno, direccion));
         }
 
-        fondo.dibujar();
+        
         fondo.dibujarMenu();
         piedras.dibujar();
 
@@ -160,7 +164,7 @@ public class Juego extends InterfaceJuego {
                 demonio.getBordeSup() < mago.getBordeInf()) {
 
                 mago.perderVida();
-                
+                System.out.println("Vidas restantes: " + mago.getVidas());
 
                 if (mago.getVidas() <= 0) {
                     juegoTerminado = true;
@@ -187,7 +191,6 @@ public class Juego extends InterfaceJuego {
             // Colisión con demonios
             for (int j = 0; j < demonios.length; j++) {
             	if (demonios[j] != null && poder.colisionaCon(demonios[j])) {
-                    demonios[j] = crearDemonio();
                     poderesActivos.remove(i); //eliminar demonio
                     i--; //ajustar indice
                     // Reemplazar si quedan demonios por aparecer
@@ -198,18 +201,24 @@ public class Juego extends InterfaceJuego {
                     }break;
             	}
             }
-            	// Eliminar si está fuera de pantalla
-            if (poder.estaFueraDePantalla()) {
-            	poderesActivos.remove(i);
-            	i--;
-            }
         } 
+        
+        if (todosDemoniosMuertos() && demoniosRestantes == 0 && !juegoGanado) {
+            juegoGanado = true;
+            juegoTerminado = true;
+        }
         mago.mostrar(); 
     }
-
+    public boolean todosDemoniosMuertos (){
+    	for (Demonio demonio : demonios) {
+            if (demonio != null) return false;
+        	}
+        return true;
+        }
     public static void main(String[] args) {
         new Juego();
     }
 }
+
 
           
