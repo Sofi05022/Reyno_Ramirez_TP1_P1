@@ -1,12 +1,10 @@
 package juego;
 
-import java.awt.Color;
 import entorno.Entorno;
 import entorno.InterfaceJuego;
 import java.util.Random;
 import java.util.ArrayList;
 import java.util.List;
-import java.awt.Image; // Importar la clase Image (ya estaba, pero es bueno recordarlo)
 
 public class Juego extends InterfaceJuego {
 	private Entorno entorno;
@@ -23,22 +21,18 @@ public class Juego extends InterfaceJuego {
 
 
     // Variables para el manejo de poderes con usos
-    private String poderActivo = null; // Stores the type of the currently active power ("bola", "fuerza", or null)
-    private int usosPoderRestantes = 0; // Remaining uses for the active power
+    private String poderActivo = null; // ("bola", "fuerza", or null)
+    private int usosPoderRestantes = 0; 
     private final int MAX_USOS_PODER_BOLA = 25; // Usos para la bola de fuego
     private final int MAX_USOS_PODER_FUERZA = 25; // Usos para el poder de fuerza (pociones)
 
     // Nuevas variables para el control de demonios
-    private int demoniosMuertosContador = 0; // Para el reemplazo en pares
+    private int demoniosMuertosContador = 0; 
     private int demoniosMatados = 0;         // Para mostrar en el menú (demonios eliminados por el jugador)
 
     Juego() {
         this.entorno = new Entorno(this, "Proyecto para TP", 800, 600);
-        
-        // Las imágenes de fin de juego ahora se cargan en el constructor de Fondo
-        // this.imagenGanado = entorno.Herramientas.cargarImagen("imagenes/ganado.png"); 
-        // this.imagenPerdido = entorno.Herramientas.cargarImagen("imagenes/perdido.png"); 
-        
+       
         reiniciarJuego(); // Inicializa el juego al inicio
         this.entorno.iniciar();
     }

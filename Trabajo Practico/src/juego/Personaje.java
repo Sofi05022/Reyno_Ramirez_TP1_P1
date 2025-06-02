@@ -139,28 +139,18 @@ public class Personaje {
         this.vida = cantidad;
     }
 
-    /**
-     * Verifica si el personaje colisiona con una piedra individual.
-     * @param piedra La PiedraIndividual con la que se verifica la colisión.
-     * @return true si hay colisión, false en caso contrario.
-     */
+   
     public boolean colisionaCon(Piedras.PiedraIndividual piedra) {
         if (piedra == null) return false;
-        // Detección de colisión AABB (Axis-Aligned Bounding Box)
         return this.getBordeDer() > piedra.getBordeIzq() &&
                this.getBordeIzq() < piedra.getBordeDer() &&
                this.getBordeInf() > piedra.getBordeSup() &&
                this.getBordeSup() < piedra.getBordeInf();
     }
 
-    /**
-     * Verifica si el personaje colisiona con un demonio.
-     * @param demonio El objeto Demonio con el que se verifica la colisión.
-     * @return true si hay colisión, false en caso contrario.
-     */
+    
     public boolean colisionaCon(Demonio demonio) {
         if (demonio == null) return false;
-        // Detección de colisión AABB (Axis-Aligned Bounding Box)
         return this.getBordeDer() > demonio.getBordeIzq() &&
                this.getBordeIzq() < demonio.getBordeDer() &&
                this.getBordeInf() > demonio.getBordeSup() &&

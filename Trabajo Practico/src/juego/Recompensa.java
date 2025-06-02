@@ -1,9 +1,10 @@
 package juego;
 
 import java.awt.Color;
-import java.awt.Image; // Importar la clase Image
+import java.awt.Image; 
 import entorno.Entorno;
-import entorno.Herramientas; // Importar Herramientas para cargar la imagen
+import entorno.Herramientas; 
+
 
 public class Recompensa {
     double x, y;
