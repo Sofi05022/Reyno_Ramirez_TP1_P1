@@ -21,15 +21,16 @@ public class Personaje {
     Entorno e;
     boolean estaApoyado;
     boolean herido;
-    int vidas; 
-    String[] poderes;
-    boolean ultimaDireccion;
+    int vida; 
+    String[] poderes; 
+    private boolean ultimaDireccionDerecha = true; // true = derecha, false = izquierda
+    private int puntuacion = 0;
 
     public Personaje(double x, double y, Entorno ent) {
         this.x = x;
         this.y = y;
         this.escala = 0.16;
-        this.velocidad = 3.0;
+        this.velocidad = 2.0; // Velocidad ajustada para el mago
 
         // Cargamos las imagenes.
         this.imagenDer = Herramientas.cargarImagen("imagenes/Mago Der.png"); 
@@ -43,12 +44,11 @@ public class Personaje {
         this.ancho = imagenDer.getWidth(null) * this.escala;
         this.alto = imagenDer.getHeight(null) * this.escala;
         this.herido = false;
-        this.vidas = 100; // Vida inicial del mago
-        this.poderes = new String[]{"🔥Bola de Fuego", "🛡️Escudo Mágico", "🌀Teletransporte"}; // Poderes adquiridos 
+        this.vida = 100; // Vida inicial del mago
+        this.poderes = new String[]{"Bola de Fuego", "Escudo Mágico", "Teletransporte"}; // Poderes adquiridos 
 
-        // Empieza con el mago mirando hacia delante
+     // Empieza con el mago mirando hacia delante
         this.inicioImage = this.imagenFrente; 
-
     }
 
     public void mostrar() {
@@ -71,26 +71,24 @@ public class Personaje {
     public double getBordeInf() {
         return this.y + (this.alto / 2);
     }
-    public boolean getUltimaDireccion() {
-    	return ultimaDireccion;
-    }
+
     // Los movimientos del mago y su actualizacion segun su movimiento
     public void moverDerecha() {
         this.x += this.velocidad;
-        ultimaDireccion = false;
         if (getBordeDer() > this.e.ancho()) {
             this.x = this.e.ancho() - (this.ancho / 2);
         }
-        this.inicioImage = this.imagenDer; 
+        this.inicioImage = this.imagenDer;
+        this.ultimaDireccionDerecha = true;
     }
- 
+
     public void moverIzquierda() {
         this.x -= this.velocidad;
-        ultimaDireccion = true;
         if (getBordeIzq() < 0) {
             this.x = 0 + (this.ancho / 2);
         }
         this.inicioImage = this.imagenIzq; 
+        this.ultimaDireccionDerecha = false;
     }
 
     public void moverArriba() {
@@ -108,23 +106,64 @@ public class Personaje {
         }
         this.inicioImage = this.imagenFrente; 
     }
-  
+
+    public int getVida() {
+        return vida;
+    }
+    
+    public void perderVida() {
+        this.vida -= 5; // Reduce la vida en 5
+    }
+    
+    public int getVidas() {
+    	return vida;
+    }
+
     public String[] getPoderes() {
         return poderes;
     }
-    // Metodos de vidas
-    public void perderVida() {
-    	this.vidas--;
+    
+    public boolean getUltimaDireccion() {
+        return ultimaDireccionDerecha;
     }
-	public int getVidas() {
-		// TODO Auto-generated method stub
-		return this.vidas;
-	}
+    
+    public int getPuntuacion() {
+        return puntuacion;
+    }
 
-	public void setVidas(int cantidad) {
-		this.vidas=cantidad;
-		// TODO Auto-generated method stub
-		
-	}
+    public void sumarPuntos(int puntos) {
+        this.puntuacion += puntos;
+    }
 
+    public void setVidas(int cantidad) {
+        this.vida = cantidad;
+    }
+
+    /**
+     * Verifica si el personaje colisiona con una piedra individual.
+     * @param piedra La PiedraIndividual con la que se verifica la colisión.
+     * @return true si hay colisión, false en caso contrario.
+     */
+    public boolean colisionaCon(Piedras.PiedraIndividual piedra) {
+        if (piedra == null) return false;
+        // Detección de colisión AABB (Axis-Aligned Bounding Box)
+        return this.getBordeDer() > piedra.getBordeIzq() &&
+               this.getBordeIzq() < piedra.getBordeDer() &&
+               this.getBordeInf() > piedra.getBordeSup() &&
+               this.getBordeSup() < piedra.getBordeInf();
+    }
+
+    /**
+     * Verifica si el personaje colisiona con un demonio.
+     * @param demonio El objeto Demonio con el que se verifica la colisión.
+     * @return true si hay colisión, false en caso contrario.
+     */
+    public boolean colisionaCon(Demonio demonio) {
+        if (demonio == null) return false;
+        // Detección de colisión AABB (Axis-Aligned Bounding Box)
+        return this.getBordeDer() > demonio.getBordeIzq() &&
+               this.getBordeIzq() < demonio.getBordeDer() &&
+               this.getBordeInf() > demonio.getBordeSup() &&
+               this.getBordeSup() < demonio.getBordeInf();
+    }
 }

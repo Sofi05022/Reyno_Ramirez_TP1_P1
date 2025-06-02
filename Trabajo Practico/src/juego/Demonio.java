@@ -128,4 +128,43 @@ public class Demonio {
             }
         }
     }
+
+    /**
+     * Verifica si el demonio colisiona con un personaje.
+     * @param personaje El objeto Personaje con el que se verifica la colisión.
+     * @return true si hay colisión, false en caso contrario.
+     */
+    public boolean colisionaCon(Personaje personaje) {
+        if (personaje == null) return false;
+        return this.getBordeDer() > personaje.getBordeIzq() &&
+               this.getBordeIzq() < personaje.getBordeDer() &&
+               this.getBordeInf() > personaje.getBordeSup() &&
+               this.getBordeSup() < personaje.getBordeInf();
+    }
+
+    /**
+     * Verifica si el demonio colisiona con una piedra individual.
+     * @param piedra La PiedraIndividual con la que se verifica la colisión.
+     * @return true si hay colisión, false en caso contrario.
+     */
+    public boolean colisionaCon(Piedras.PiedraIndividual piedra) {
+        if (piedra == null) return false;
+        return this.getBordeDer() > piedra.getBordeIzq() &&
+               this.getBordeIzq() < piedra.getBordeDer() &&
+               this.getBordeInf() > piedra.getBordeSup() &&
+               this.getBordeSup() < piedra.getBordeInf();
+    }
+
+    /**
+     * Verifica si el demonio colisiona con otro demonio.
+     * @param otroDemonio El objeto Demonio con el que se verifica la colisión.
+     * @return true si hay colisión, false en caso contrario.
+     */
+    public boolean colisionaCon(Demonio otroDemonio) {
+        if (otroDemonio == null) return false;
+        return this.getBordeDer() > otroDemonio.getBordeIzq() &&
+               this.getBordeIzq() < otroDemonio.getBordeDer() &&
+               this.getBordeInf() > otroDemonio.getBordeSup() &&
+               this.getBordeSup() < otroDemonio.getBordeInf();
+    }
 }
