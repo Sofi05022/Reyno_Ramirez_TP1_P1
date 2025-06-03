@@ -18,8 +18,7 @@ public class Juego extends InterfaceJuego {
     private List<Poderes> poderesActivos; // Esta lista ahora contendrá tanto bolas de fuego como pociones de fuerza
     private int demoniosEliminadosDesdeUltimaRecompensa = 0;
     private Recompensa recompensaActiva = null; 
-
-
+    
     // Variables para el manejo de poderes con usos
     private String poderActivo = null; // ("bola", "fuerza", or null)
     private int usosPoderRestantes = 0; 
@@ -28,7 +27,7 @@ public class Juego extends InterfaceJuego {
 
     // Nuevas variables para el control de demonios
     private int demoniosMuertosContador = 0; 
-    private int demoniosMatados = 0;         // Para mostrar en el menú (demonios eliminados por el jugador)
+    private int demoniosMatados = 0;    // Para mostrar en el menú (demonios eliminados por el jugador)
 
     Juego() {
         this.entorno = new Entorno(this, "Proyecto para TP", 800, 600);
@@ -119,7 +118,6 @@ public class Juego extends InterfaceJuego {
 
             intentos++;
             if (intentos > MAX_INTENTOS) {
-                System.err.println("No se pudo encontrar una posición válida para el demonio después de " + MAX_INTENTOS + " intentos.");
                 return null; // Retornar null si no se puede colocar
             }
 
@@ -346,7 +344,7 @@ public class Juego extends InterfaceJuego {
             juegoGanado = false;
         }
 
-        if (mago.getPuntuacion() >= 350 && !juegoGanado) {
+        if (mago.getPuntuacion() >= 400 && !juegoGanado) {
             juegoGanado = true;
             juegoTerminado = true;
         }
